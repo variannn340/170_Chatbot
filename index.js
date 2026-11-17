@@ -33,7 +33,7 @@ app.post("/api/chat", async (req, res) => {
                 "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`
             },
             body: JSON.stringify({
-                model: "inclusional/ling-3.2-flash:free",
+                model: "inclusionai/ling-3.2-flash:free",
                 messages: messages,
                 temperature: 0.7,
                 max_tokens: 1000,
@@ -73,10 +73,8 @@ app.post("/api/chat", async (req, res) => {
 
         for (const line of lines) {
             const trimmedLine = line.trim();
-            if (!trimmedLine) {
-                continue;
-            }
-            if (trimmedLine.startsWith("data:")) {
+            
+            if (!trimmedLine || !trimmedLine.startsWith("data:")) {
                 continue;
             }
 
